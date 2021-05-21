@@ -1,5 +1,5 @@
 {% set name = "scitokens-cpp" %}
-{% set version = "0.6.0" %}
+{% set version = "0.6.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/scitokens/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 3a5252ff8327696b109cd9ee70eaeb028a56b86f44149aaac10580df55fb4d26
+  sha256: 0be7a6aef360b2fd821226cb1029f3ec85ac5d5289131b42f7e8520e277feb91
   patches:
     # don't vendor gtest, we have it
     # see https://github.com/scitokens/scitokens-cpp/pull/47
