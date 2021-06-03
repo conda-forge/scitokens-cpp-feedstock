@@ -8,13 +8,6 @@ package:
 source:
   url: https://github.com/scitokens/{{ name }}/archive/v{{ version }}.tar.gz
   sha256: 0be7a6aef360b2fd821226cb1029f3ec85ac5d5289131b42f7e8520e277feb91
-  patches:
-    # don't vendor gtest, we have it
-    # see https://github.com/scitokens/scitokens-cpp/pull/47
-    - no-vendor-gtest.patch
-    # use gnuinstalldirs
-    # see https://github.com/scitokens/scitokens-cpp/pull/45
-    - gnuinstalldirs.patch
 
 build:
   number: 0
