@@ -10,7 +10,7 @@ source:
   sha256: bc578434b9bfa524a20952f4f60e4135dfcfc10749044e7abc6c62503e14ed6f
 
 build:
-  number: 0
+  number: 1
   run_exports:
     - {{ pin_subpackage("scitokens-cpp", max_pin="x") }}
   skip: true  # [win]
@@ -26,7 +26,7 @@ requirements:
     - gtest
     - jwt-cpp 0.4.*
     - libcurl
-    - libuuid
+    - libuuid  # [linux]
     - openssl
     - picojson
     - sqlite
