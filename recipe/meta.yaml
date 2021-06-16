@@ -24,7 +24,7 @@ requirements:
     - pkg-config
   host:
     - gtest
-    - jwt-cpp 0.4.*
+    - jwt-cpp
     - libcurl
     - libuuid
     - openssl
