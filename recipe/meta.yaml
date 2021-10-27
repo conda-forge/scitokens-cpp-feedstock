@@ -13,6 +13,8 @@ source:
     - macos-uuid.patch  # [osx]
 
 build:
+  error_overdepending: true
+  error_overlinking: true
   number: 0
   run_exports:
     - {{ pin_subpackage("scitokens-cpp", max_pin="x") }}
