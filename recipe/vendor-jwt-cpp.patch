@@ -1,0 +1,10 @@
+diff --git a/cmake/Findjwt-cpp.cmake b/cmake/Findjwt-cpp.cmake
+index a8272f7..2346ba0 100644
+--- a/cmake/Findjwt-cpp.cmake
++++ b/cmake/Findjwt-cpp.cmake
+@@ -6,4 +6,5 @@ FIND_PATH(JWT_CPP_INCLUDES jwt-cpp/jwt.h
+   /usr
+   ${PROJECT_SOURCE_DIR}/vendor/jwt-cpp
+   PATH_SUFFIXES include
++  NO_CMAKE_FIND_ROOT_PATH
+ )
