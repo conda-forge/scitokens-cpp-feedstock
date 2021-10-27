@@ -1,5 +1,5 @@
 {% set name = "scitokens-cpp" %}
-{% set version = "0.6.2" %}
+{% set version = "0.6.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,15 @@ package:
 
 source:
   url: https://github.com/scitokens/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: bc578434b9bfa524a20952f4f60e4135dfcfc10749044e7abc6c62503e14ed6f
+  sha256: df6758b0d5cc288befe4b4a44f29bc7afedf62093a6c8b9ab5e6fbcecf40daf4
+  patches:
+    # https://github.com/scitokens/scitokens-cpp/issues/70
+    - macos-uuid.patch  # [osx]
 
 build:
-  number: 1
+  error_overdepending: true
+  error_overlinking: true
+  number: 0
   run_exports:
     - {{ pin_subpackage("scitokens-cpp", max_pin="x") }}
   skip: true  # [win]
