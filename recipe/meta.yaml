@@ -8,6 +8,9 @@ package:
 source:
   url: https://github.com/scitokens/{{ name }}/archive/v{{ version }}.tar.gz
   sha256: df6758b0d5cc288befe4b4a44f29bc7afedf62093a6c8b9ab5e6fbcecf40daf4
+  patches:
+    # https://github.com/scitokens/scitokens-cpp/issues/70
+    - macos-uuid.patch  # [osx]
 
 build:
   number: 0
