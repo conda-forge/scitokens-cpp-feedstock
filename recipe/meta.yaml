@@ -11,11 +11,13 @@ source:
   patches:
     # https://github.com/scitokens/scitokens-cpp/issues/70
     - macos-uuid.patch  # [osx]
+    # https://github.com/scitokens/scitokens-cpp/issues/61
+    - vendor-jwt-cpp.patch
 
 build:
   error_overdepending: true
   error_overlinking: true
-  number: 0
+  number: 1
   run_exports:
     - {{ pin_subpackage("scitokens-cpp", max_pin="x") }}
   skip: true  # [win]
@@ -29,7 +31,7 @@ requirements:
     - pkg-config
   host:
     - gtest
-    - jwt-cpp 0.4.*
+    #- jwt-cpp 0.4.*  <-- jwt-cpp 0.4.0 isn't being migrated on conda-forge
     - libcurl
     - libuuid  # [linux]
     - openssl
@@ -46,7 +48,9 @@ about:
   dev_url: https://github.com/scitokens/scitokens-cpp
   summary: A C++ implementation of the SciTokens library with a C library interface
   license: Apache-2.0
-  license_file: LICENSE
+  license_file:
+    - LICENSE
+    - vendor/jwt-cpp/LICENSE
   description: |
     SciTokens provide a token format for distributed authorization.
     The tokens are self-describing, can be verified in a distributed
