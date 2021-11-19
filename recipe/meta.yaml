@@ -13,6 +13,8 @@ source:
     - macos-uuid.patch  # [osx]
     # https://github.com/scitokens/scitokens-cpp/issues/61
     - vendor-jwt-cpp.patch
+    # https://github.com/scitokens/scitokens-cpp/issues/72
+    - cflags.patch
 
 build:
   error_overdepending: true
