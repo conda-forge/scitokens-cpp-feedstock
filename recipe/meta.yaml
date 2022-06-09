@@ -13,6 +13,8 @@ source:
     - vendor-jwt-cpp.patch
     # https://github.com/scitokens/scitokens-cpp/issues/72
     - cflags.patch
+    # https://github.com/scitokens/scitokens-cpp/pull/83
+    - ce25f80.patch
 
 build:
   error_overdepending: true
