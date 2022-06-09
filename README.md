@@ -243,5 +243,6 @@ Feedstock Maintainers
 =====================
 
 * [@chrisburr](https://github.com/chrisburr/)
+* [@djw8605](https://github.com/djw8605/)
 * [@duncanmmacleod](https://github.com/duncanmmacleod/)
 
