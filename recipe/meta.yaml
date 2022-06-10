@@ -1,5 +1,5 @@
 {% set name = "scitokens-cpp" %}
-{% set version = "0.6.3" %}
+{% set version = "0.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,19 +7,19 @@ package:
 
 source:
   url: https://github.com/scitokens/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: df6758b0d5cc288befe4b4a44f29bc7afedf62093a6c8b9ab5e6fbcecf40daf4
+  sha256: 72600cf32523b115ec7abf4ac33fa369e0a655b3d3b390e1f68363e6c4e961b6
   patches:
-    # https://github.com/scitokens/scitokens-cpp/issues/70
-    - macos-uuid.patch  # [osx]
     # https://github.com/scitokens/scitokens-cpp/issues/61
     - vendor-jwt-cpp.patch
     # https://github.com/scitokens/scitokens-cpp/issues/72
     - cflags.patch
+    # https://github.com/scitokens/scitokens-cpp/pull/83
+    - ce25f80.patch
 
 build:
   error_overdepending: true
   error_overlinking: true
-  number: 2
+  number: 0
   run_exports:
     - {{ pin_subpackage("scitokens-cpp", max_pin="x") }}
   skip: true  # [win]
@@ -64,4 +64,5 @@ about:
 extra:
   recipe-maintainers:
     - chrisburr
+    - djw8605
     - duncanmmacleod
