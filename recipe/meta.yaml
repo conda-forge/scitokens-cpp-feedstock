@@ -1,5 +1,5 @@
 {% set name = "scitokens-cpp" %}
-{% set version = "0.7.3" %}
+{% set version = "1.0.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/scitokens/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 7d3c438596588cd74cf1af8255c55f44ca86a34293b81415ee24b33de64f886a
+  sha256: cdc1e80e0cba9ca0e16de2efa10ec5e38765792bf5107024bfb66ddad5a16a85
   patches:
     # https://github.com/scitokens/scitokens-cpp/issues/61
     - vendor-jwt-cpp.patch
