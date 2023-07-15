@@ -20,13 +20,6 @@ libuuid:
 - '2'
 openssl:
 - 1.1.1
-pin_run_as_build:
-  libcurl:
-    max_pin: x
-  libuuid:
-    max_pin: x
-  sqlite:
-    max_pin: x
 sqlite:
 - '3'
 target_platform:

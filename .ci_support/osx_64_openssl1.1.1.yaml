@@ -7,18 +7,13 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '13'
+- '14'
 libcurl:
 - '7'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 openssl:
 - 1.1.1
-pin_run_as_build:
-  libcurl:
-    max_pin: x
-  sqlite:
-    max_pin: x
 sqlite:
 - '3'
 target_platform:
