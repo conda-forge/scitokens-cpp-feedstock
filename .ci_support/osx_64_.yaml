@@ -13,13 +13,13 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '18'
+- '19'
 libcurl:
 - '8'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 openssl:
-- '3'
+- '3.5'
 sqlite:
 - '3'
 target_platform:
