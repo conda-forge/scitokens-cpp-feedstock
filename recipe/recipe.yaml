@@ -1,57 +1,60 @@
-{% set name = "scitokens-cpp" %}
-{% set version = "1.4.1" %}
+schema_version: 1
+
+context:
+  name: scitokens-cpp
+  version: 1.4.1
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: ${{ name|lower }}
+  version: ${{ version }}
 
 source:
-  url: https://github.com/scitokens/{{ name }}/archive/v{{ version }}.tar.gz
+  url: https://github.com/scitokens/${{ name }}/archive/v${{ version }}.tar.gz
   sha256: 08b9a31375c338001694f07d0945064900734074bb86e2300eacec9421360a5a
   patches:
     # https://github.com/scitokens/scitokens-cpp/issues/61
     - vendor-jwt-cpp.patch
 
 build:
-  error_overdepending: true
-  error_overlinking: true
-  ignore_run_exports:
-    # supports build-time testing, not linked
-    - gtest
   number: 0
-  run_exports:
-    - {{ pin_subpackage("scitokens-cpp", max_pin="x") }}
-  skip: true  # [win]
+  skip:
+    - win
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
-    - {{ stdlib('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib('c') }}
     - cmake
-    - make  # [unix]
-    - ninja  # [not unix]
     - pkg-config
+    - make
   host:
     - gtest
     - libcurl
-    - libuuid  # [linux]
     - openssl
     - picojson
     - sqlite
+    - if: linux
+      then:
+        - libuuid
+  run_exports:
+    - ${{ pin_subpackage("scitokens-cpp", upper_bound="x") }}
+  ignore_run_exports:
+    by_name:
+      - gtest
 
-test:
-  commands:
-    - test -f ${PREFIX}/include/scitokens/scitokens.h  # [unix]
-    - test -f ${PREFIX}/lib/libSciTokens${SHLIB_EXT}  # [unix]
+tests:
+  - package_contents:
+      bin:
+        - scitokens-test
+      include:
+        - scitokens/scitokens.h
+  - script:
+      - scitokens-create -h
+      - scitokens-generate-jwks -h
+      - scitokens-verify -h
 
 about:
-  home: https://github.com/scitokens/scitokens-cpp
-  dev_url: https://github.com/scitokens/scitokens-cpp
   summary: A C++ implementation of the SciTokens library with a C library interface
-  license: Apache-2.0
-  license_file:
-    - LICENSE
-    - vendor/jwt-cpp/LICENSE
   description: |
     SciTokens provide a token format for distributed authorization.
     The tokens are self-describing, can be verified in a distributed
@@ -59,6 +62,12 @@ about:
     valid). This is convenient for a federated environment where several
     otherwise-independent storage endpoints want to delegate trust for an
     issuer for managing a storage allocation.
+  homepage: https://github.com/scitokens/scitokens-cpp
+  repository: https://github.com/scitokens/scitokens-cpp
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - vendor/jwt-cpp/LICENSE
 
 extra:
   recipe-maintainers:
