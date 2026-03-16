@@ -18,7 +18,6 @@ valid). This is convenient for a federated environment where several
 otherwise-independent storage endpoints want to delegate trust for an
 issuer for managing a storage allocation.
 
-
 Current build status
 ====================
 
