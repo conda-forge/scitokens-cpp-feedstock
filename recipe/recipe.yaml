@@ -14,6 +14,7 @@ source:
   patches:
     # https://github.com/scitokens/scitokens-cpp/issues/61
     - vendor-jwt-cpp.patch
+    - 0001-fix-concurrent-cache-test.patch
 
 build:
   number: 0
