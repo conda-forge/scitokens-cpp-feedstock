@@ -21,6 +21,9 @@ build:
   dynamic_linking:
     overdepending_behavior: error
     overlinking_behavior: error
+    # shortcut: the checker misclassifies this package's own SONAME; remove when fixed.
+    missing_dso_allowlist:
+      - lib/libSciTokens.so.0
 
 requirements:
   build:
@@ -49,6 +52,7 @@ requirements:
 
 tests:
   - script:
+      - scitokens-create --help
       - if: unix
         then: test -f ${PREFIX}/include/scitokens/scitokens.h
       - if: unix
