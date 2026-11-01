@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euxo pipefail
 
 mkdir _build
 pushd _build
@@ -8,16 +9,16 @@ cmake \
 	${SRC_DIR} \
 	${CMAKE_ARGS} \
 	-DCMAKE_BUILD_TYPE:STRING=Release \
-	-DBUILD_UNITTESTS:BOOL=TRUE \
-	-DEXTERNAL_GTEST:BOOL=TRUE \
+	-DSCITOKENS_BUILD_UNITTESTS:BOOL=TRUE \
+	-DSCITOKENS_EXTERNAL_GTEST:BOOL=TRUE \
 ;
 
 # build
 cmake --build . --verbose --parallel ${CPU_COUNT}
 
 # test
-if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
-	ctest --verbose --parallel ${CPU_COUNT}
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:-}" != "" ]]; then
+	ctest --output-on-failure --no-tests=error --parallel ${CPU_COUNT}
 fi
 
 # install

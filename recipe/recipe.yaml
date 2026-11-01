@@ -1,0 +1,84 @@
+schema_version: 1
+
+context:
+  name: scitokens-cpp
+  version: "1.4.1"
+
+package:
+  name: scitokens-cpp
+  version: ${{ version }}
+
+source:
+  url: https://github.com/scitokens/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 08b9a31375c338001694f07d0945064900734074bb86e2300eacec9421360a5a
+  patches:
+    # https://github.com/scitokens/scitokens-cpp/issues/61
+    - vendor-jwt-cpp.patch
+    - 0001-fix-concurrent-cache-test.patch
+
+build:
+  number: 0
+  skip: win
+  dynamic_linking:
+    overdepending_behavior: error
+    overlinking_behavior: error
+    # shortcut: the checker misclassifies this package's own SONAME; remove when fixed.
+    missing_dso_allowlist:
+      - lib/libSciTokens.so.0
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib('c') }}
+    - cmake
+    - if: unix
+      then: make
+    - if: not unix
+      then: ninja
+    - pkg-config
+    - python ${{ python_min }}.*
+  host:
+    - gtest
+    - libcurl
+    - if: linux
+      then: libuuid
+    - openssl
+    - picojson
+    - sqlite
+  run_exports:
+    - ${{ pin_subpackage("scitokens-cpp", upper_bound="x") }}
+  ignore_run_exports:
+    by_name:
+      - gtest
+
+tests:
+  - script:
+      - scitokens-create --help
+      - if: unix
+        then: test -f ${PREFIX}/include/scitokens/scitokens.h
+      - if: unix
+        then: test -f ${PREFIX}/lib/libSciTokens${SHLIB_EXT}
+
+about:
+  summary: A C++ implementation of the SciTokens library with a C library interface
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - vendor/jwt-cpp/LICENSE
+  description: |
+    SciTokens provide a token format for distributed authorization.
+    The tokens are self-describing, can be verified in a distributed
+    fashion (no need to contact the issuer to determine if the token is
+    valid). This is convenient for a federated environment where several
+    otherwise-independent storage endpoints want to delegate trust for an
+    issuer for managing a storage allocation.
+
+
+  homepage: https://github.com/scitokens/scitokens-cpp
+  repository: https://github.com/scitokens/scitokens-cpp
+
+extra:
+  recipe-maintainers:
+    - chrisburr
+    - djw8605
+    - duncanmmacleod
