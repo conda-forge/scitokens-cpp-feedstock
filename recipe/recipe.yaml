@@ -32,7 +32,7 @@ requirements:
     - if: not unix
       then: ninja
     - pkg-config
-    - python
+    - python ${{ python_min }}.*
   host:
     - gtest
     - libcurl
